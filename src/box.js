@@ -1,11 +1,12 @@
 import React from 'react'
 import { removeKeys } from './lib/remove-keys'
+import { propsToStyles } from './libs/helpers'
 import * as colorStyles from './styles/colors'
 import * as flexStyles from './styles/flex'
 import * as spacingStyles from './styles/spacing'
 import * as utilStyles from './styles/utils'
 
-const styleGuide = [
+export const styleGuide = [
   flexStyles,
   {
     color,
@@ -23,37 +24,6 @@ const styleGuide = [
   },
   utilStyles,
 ]
-const mapToPair = props => key => [key, props[key]]
-const noPairFoundError = (key, value) =>
-  `Prop ${key}="${value}" found in style guide`
-const mapToStyleGuildValue = ({ used = [], key, value }) => (val, curr) => {
-  if (val) return val
-  if (curr[key]) {
-    used.push(key)
-    if (!curr[key][value]) {
-      console.error(noPairFoundError(key, value))
-    } else {
-      return curr[key][value]
-    }
-  }
-  return val
-}
-const cssDataPattern = /^data-css/
-export const propsToStyles = styles => props => {
-  const used = []
-  const styles = Object.keys(props)
-    .map(mapToPair(props))
-    .map(pair => {
-      const [key, value] = pair
-      if (cssDataPattern.test(key)) {
-        used.push(key)
-        return key.replace(cssDataPattern, 'css')
-      }
-      return styleGuide.reduce(mapToStyleGuildValue({ used, key, value }), null)
-    })
-    .filter(x => x)
-  return { used, styles }
-}
 
 export const Box = props => {
   const { Component, getStyles } = props
