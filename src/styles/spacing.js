@@ -1,5 +1,3 @@
-import { css } from 'glamor'
-
 import { generateStyle } from './helpers'
 
 const values = {

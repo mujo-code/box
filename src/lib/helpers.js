@@ -8,9 +8,7 @@ export const mapToStyleGuildValue = ({ used = [], key, value }) => (
   if (val) return val
   if (curr[key]) {
     used.push(key)
-    if (!curr[key][value]) {
-      console.error(noPairFoundError(key, value))
-    } else {
+    if (curr[key][value]) {
       return curr[key][value]
     }
   }

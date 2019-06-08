@@ -1,6 +1,6 @@
 {
   "name": "@jcblw/box",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "a simple React utility to add a style guide to a general component",
   "main": "dist/box.js",
   "scripts": {
@@ -18,8 +18,12 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-import-order-alphabetical": "0.0.2",
     "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
     "glamor": "^2.20.40",
     "prettier": "^1.17.1",
     "react": "^16.8.6"
@@ -27,5 +31,8 @@
   "peerDependencies": {
     "glamor": ">=2.20.40",
     "react": ">=16.8.6"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "^17.4.0"
   }
 }
