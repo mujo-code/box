@@ -4,13 +4,21 @@ This is a common component in React style guides like [gestalt](https://pinteres
 
 ## Technology
 
+You will need to install these packages since they are peerDependencies.
+
 - [glamor](https://github.com/threepointone/glamor)
 - [react](https://reactjs.org/)
 
 ## Install
 
 ```shell
-npm install @jcblw/box
+npm install @jcblw/box --save
+```
+
+and if you do not have react or glamor.
+
+```shell
+npm install react glamor --save
 ```
 
 # Extend
