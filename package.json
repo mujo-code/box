@@ -1,6 +1,6 @@
 {
   "name": "@jcblw/box",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "a simple React utility to add a style guide to a general component",
   "main": "dist/box.js",
   "scripts": {
