@@ -1,4 +1,4 @@
-import { css } from 'glamor'
+import { css } from '@emotion/core'
 
 export const cursor = {
   pointer: css({ cursor: 'pointer' }),

@@ -1,4 +1,4 @@
-import { css } from 'glamor'
+import { css } from '@emotion/core'
 
 export const display = {
   inlineFlex: css({ display: 'inline-flex' }),

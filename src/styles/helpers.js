@@ -1,9 +1,6 @@
-import { css } from 'glamor'
+import { css } from '@emotion/core'
 
 export const generateStyle = (property, dict) => (accum, key) =>
   Object.assign(accum, { [key]: css({ [property]: dict[key] }) })
 
-export const cssToStyle = cssProp => {
-  const cssArgs = Array.isArray(cssProp) ? cssProp : [cssProp]
-  return cssProp ? css(...cssArgs) : {}
-}
+export const cssToStyle = cssProp => (cssProp ? css(cssProp) : {})
