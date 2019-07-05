@@ -8,7 +8,7 @@ Box is a [single element component](https://www.freecodecamp.org/news/introducin
 
 You will need to install these packages since they are peerDependencies.
 
-- [glamor](https://github.com/threepointone/glamor)
+- [emotion](https://emotion.sh/)
 - [react](https://reactjs.org/)
 
 ## Install
@@ -17,10 +17,10 @@ You will need to install these packages since they are peerDependencies.
 npm install @jcblw/box --save
 ```
 
-and if you do not have react or glamor.
+and if you do not have react or emotion.
 
 ```shell
-npm install react glamor --save
+npm install react emotion --save
 ```
 
 # Usage
@@ -71,7 +71,7 @@ This modifies the existing style guide for box.
 ```js
 // interface cssChunk {
 //   [cssProperty: String]: {
-//     [cssValue: String]: GamorCSSObject
+//     [cssValue: String]: EmotionCSSObject
 //   }
 // }
 // example
