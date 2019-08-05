@@ -1,5 +1,5 @@
 {
-  "name": "@jcblw/box",
+  "name": "@mujo/box",
   "version": "3.0.0",
   "description": "a simple React utility to add a style guide to a general component",
   "main": "dist/box.js",

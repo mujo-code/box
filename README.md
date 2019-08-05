@@ -14,7 +14,7 @@ You will need to install these packages since they are peerDependencies.
 ## Install
 
 ```shell
-npm install @jcblw/box --save
+npm install @mujo/box --save
 ```
 
 and if you do not have react or emotion.
@@ -26,7 +26,7 @@ npm install react emotion --save
 # Usage
 
 ```js
-import { Box } from '@jcblw/box'
+import { Box } from '@mujo/box'
 
 export const MyComponent = () => <Box padding="s">A box with padding</Box>
 ```
@@ -61,7 +61,7 @@ There is a couple of ways to extend Box, I think the api will eventually change 
 
 ```js
 // Somewhere that is loaded early in your application.
-import { styleGuide } from '@jcblw/box'
+import { styleGuide } from '@mujo/box'
 
 styleGuide.push(cssChunk)
 ```
@@ -87,7 +87,7 @@ see [more examples](./src/styles/utils.js)
 Right now there is not a way to do this without setting up a proxy component.
 
 ```js
-import { propsToStyles } from '@jcblw/box/dist/lib/helpers'
+import { propsToStyles } from '@mujo/box/dist/lib/helpers'
 
 const myGetStyles = propsToStyles(customStyleGuide) // load your custom styles here
 
