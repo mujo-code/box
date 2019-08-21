@@ -13,7 +13,7 @@ export const styleGuide = [flexStyles, spacingStyles, utilStyles]
 export const Box = React.forwardRef((props, ref) => {
   const { Component, getStyles, css, styles, name } = props
   const customStyles = cssToStyle(css)
-  const results = getStyles(Object.assign({}, props))
+  const results = getStyles({ ...props })
   const otherProps = removeKeys(
     props,
     ...results.used,
