@@ -68,3 +68,20 @@ export function propsToStyles<T>(stylesObjs: StyleGuideHash) {
     return { used, styles }
   }
 }
+
+interface MakeStyles {
+  <K extends string, T extends {}>(property: K, obj: T): {
+    [K2 in keyof typeof obj]: { [key: string]: T[K2] }
+  }
+}
+
+export const makeStyles: MakeStyles = (property: string, props) => {
+  const ret = {} as {
+    [K in keyof typeof props]: { [key: string]: typeof props[K] }
+  }
+  let key: keyof typeof props
+  for (key in props) {
+    ret[key] = { [property]: props[key] }
+  }
+  return ret
+}
