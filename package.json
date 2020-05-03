@@ -1,9 +1,12 @@
 {
   "name": "@mujo/box",
-  "version": "4.0.0",
+  "version": "4.0.2",
   "description": "A React utility to add a style guide to primative components",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "test": "npm run lint && jest",
     "fmt": "prettier '{src,public}/**/*.{ts,tsx}' --write",
