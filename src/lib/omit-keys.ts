@@ -5,12 +5,12 @@ interface OmitKeys {
 }
 
 export const omitKeys: OmitKeys = (props, ...keys) => {
-  let ret = {} as {
+  const ret = {} as {
     [K in keyof typeof props]: typeof props[K]
   }
   let key: keyof typeof props
   for (key in props) {
-    if (keys.indexOf(key) !== -1) {
+    if (keys.indexOf(key) === -1) {
       ret[key] = props[key]
     }
   }

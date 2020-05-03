@@ -2,14 +2,16 @@
   "name": "@mujo/box",
   "version": "4.0.0",
   "description": "A React utility to add a style guide to primative components",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "npm run lint && jest",
     "fmt": "prettier '{src,public}/**/*.{ts,tsx}' --write",
     "lint": "eslint '{src,public}/**/*.{ts,tsx}'",
     "build": "npm run build:code && npm run build:def",
-    "build:code": "babel src --out-dir dist --extensions '.ts,.tsx'",
-    "build:def": "tsc --emitDeclarationOnly"
+    "build:code": "NODE_ENV=production babel src --out-dir dist --extensions '.ts,.tsx'",
+    "build:def": "tsc --emitDeclarationOnly",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "react",
@@ -26,6 +28,7 @@
     "@babel/preset-react": "^7.0.0",
     "@emotion/core": "^10.0.14",
     "@mujo/eslint-config": "^1.0.4",
+    "@testing-library/react": "^10.0.4",
     "@types/jest": "^25.2.1",
     "@types/react": "^16.9.34",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
@@ -40,6 +43,7 @@
     "jest-watch-typeahead": "^0.4.0",
     "prettier": "^1.17.1",
     "react": "^16.9.0",
+    "react-dom": "^16.13.1",
     "react-test-renderer": "^16.9.0",
     "typescript": "^3.8.3"
   },
@@ -52,8 +56,8 @@
       "src/**/*.{js}"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.js",
-      "<rootDir>/src/**/*.{spec,test}.js"
+      "<rootDir>/src/**/__tests__/**/*.{ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{ts,tsx}"
     ],
     "testEnvironment": "jest-environment-jsdom-fourteen",
     "transform": {
@@ -64,12 +68,10 @@
     ],
     "modulePaths": [],
     "moduleFileExtensions": [
-      "web.js",
       "js",
-      "web.ts",
+      "ts",
       "json",
-      "web.jsx",
-      "jsx",
+      "tsx",
       "node"
     ],
     "watchPlugins": [

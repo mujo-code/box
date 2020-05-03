@@ -1,6 +1,4 @@
-import { StyleGuideHash } from '../types'
-
-export const flexStyles: StyleGuideHash = {
+export const flexStyles = {
   display: {
     flex: { display: 'flex' },
     block: { display: 'block' },

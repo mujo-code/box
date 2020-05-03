@@ -10,22 +10,7 @@ type FlexAlignment =
   | 'spaceAround'
   | 'spaceEvenly'
 
-type PixelOrPercent = number | string
-type PassedComponent = React.ComponentType<any> | string
-
-export interface BoxProps {
-  Component: PassedComponent
-  css: CSSObject
-  // Note: This seems to be a bug, these are SerializedStyles props
-  styles: string
-  name: string
-
-  // Yoga Style Props
-  position: 'relative' | 'fixed'
-  top: number
-  left: number
-  right: number
-  bottom: number
+export interface BoxStyleProps {
   alignItems: FlexAlignment
   alignSelf: FlexAlignment
   flexDirection: 'row' | 'column' | 'rowReverse' | 'columnReverse'
@@ -34,33 +19,37 @@ export interface BoxProps {
   flexShrink: number
   flexBasis: number
   justifyContent: FlexAlignment
-  boxSizing: 'borderBox'
-  margin: PixelOrPercent
-  marginTop: PixelOrPercent
-  marginBottom: PixelOrPercent
-  marginLeft: PixelOrPercent
-  marginRight: PixelOrPercent
-  padding: PixelOrPercent
-  paddingTop: PixelOrPercent
-  paddingBottom: PixelOrPercent
-  paddingLeft: PixelOrPercent
-  paddingRight: PixelOrPercent
-  minWidth: PixelOrPercent
-  minHeight: PixelOrPercent
-  maxHeight: PixelOrPercent
-  maxWidth: PixelOrPercent
-  width: PixelOrPercent
-  height: PixelOrPercent
-  [key: string]: unknown
+}
+
+type PassedComponent = React.ElementType
+type ElementProps<T, K> = Exclude<K, keyof T>
+
+export type BoxProps<
+  T,
+  K = React.BaseHTMLAttributes<HTMLDivElement>
+> = ElementProps<T, K> & {
+  Component: PassedComponent
+  css: CSSObject
+}
+
+export type MakeBoxProps<
+  T,
+  K = React.BaseHTMLAttributes<HTMLDivElement>
+> = Partial<BoxProps<T, K> & SubObjectKeys<T>>
+
+export type SubObjectKeys<T> = {
+  [K in keyof T]: T[K] extends object ? keyof T[K] : never
 }
 
 export interface StyleGuideHash {
   [key: string]: {
-    [value: string]: CSSObject
+    [value: string]: {
+      [property: string]: unknown
+    }
   }
 }
 
 export interface StyleGuideValue {
   defaultComponent: PassedComponent
-  styleGuide: StyleGuideHash[]
+  styleGuide: StyleGuideHash
 }

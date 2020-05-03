@@ -6,11 +6,9 @@ type CSSToStyle = (cssProp: CSSObject) => SerializedStyles
 export const cssToStyle: CSSToStyle = cssProp =>
   cssProp ? css(cssProp) : css({})
 
-type MapToPair = (
-  props: Partial<BoxProps>
-) => (key: string) => [string, string | number | unknown]
-
-export const mapToPair: MapToPair = props => key => [key, props[key]]
+export function mapToPair<T>(props: Partial<BoxProps<T>>) {
+  return (key: string): [string, string | number | unknown] => [key, props[key]]
+}
 
 interface MappingAccum {
   used: string[]
@@ -37,7 +35,7 @@ export const mapToStyleGuideValue: MapToStyleGuideValue = ({
       (typeof value === 'string' || typeof value === 'number') &&
       curr[key][value]
     ) {
-      return cssToStyle(curr[key][value])
+      return cssToStyle(curr[key][value] as CSSObject)
     }
   }
   return val
@@ -50,22 +48,23 @@ interface PropsToStylesRet {
   styles: SerializedStyles[]
 }
 
-type PropsToStyles = (
-  stylesObjs: StyleGuideHash[]
-) => (props: Partial<BoxProps>) => PropsToStylesRet
-
-export const propsToStyles: PropsToStyles = stylesObjs => props => {
-  const used: string[] = []
-  const styles = Object.keys(props)
-    .map(mapToPair(props))
-    .map(pair => {
-      const [key, value] = pair
-      if (cssDataPattern.test(key)) {
-        used.push(key)
-        return key.replace(cssDataPattern, 'css')
-      }
-      return stylesObjs.reduce(mapToStyleGuideValue({ used, key, value }), null)
-    })
-    .filter(x => x) as SerializedStyles[]
-  return { used, styles }
+export function propsToStyles<T>(stylesObjs: StyleGuideHash) {
+  return (props: Partial<BoxProps<T>>): PropsToStylesRet => {
+    const used: string[] = []
+    const styles = Object.keys(props)
+      .map(mapToPair(props))
+      .map(pair => {
+        const [key, value] = pair
+        if (cssDataPattern.test(key)) {
+          used.push(key)
+          return key.replace(cssDataPattern, 'css')
+        }
+        return [stylesObjs].reduce(
+          mapToStyleGuideValue({ used, key, value }),
+          null
+        )
+      })
+      .filter(x => x) as SerializedStyles[]
+    return { used, styles }
+  }
 }

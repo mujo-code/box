@@ -2,9 +2,10 @@
   "compilerOptions": {
     "jsx": "react",
     "esModuleInterop": true,
-    "rootDir": "src",
     "outDir": "dist",
     "declaration": true,
-    "lib": ["es2015"]
-  }
+    "downlevelIteration": true,
+    "lib": ["es2015", "dom"]
+  },
+  "include": ["./src"]
 }

@@ -3,32 +3,34 @@ import { jsx } from '@emotion/core'
 import React from 'react'
 import { propsToStyles, cssToStyle } from './lib/helpers'
 import { omitKeys } from './lib/omit-keys'
-// import * as spacingStyles from './styles/spacing'
-// import * as utilStyles from './styles/utils'
-import { BoxProps } from './types'
-import { useStyleGuideBox } from './style-guide'
+import { StyleGuideValue, MakeBoxProps } from './types'
+import { flexStyles } from './styles/flex'
 
-export const Box = React.forwardRef<unknown, BoxProps>((props, ref) => {
-  const { defaultComponent, styleGuide } = useStyleGuideBox()
-  const getStyles = propsToStyles(styleGuide)
-  const { Component = defaultComponent, css, styles, name } = props
-  const customStyles = cssToStyle(css)
-  const results = getStyles(props)
-  const otherProps = omitKeys(
-    props,
-    'Component',
-    'css',
-    'styles',
-    'name',
-    ...results.used
-  )
-  if (name && styles) {
-    results.styles.push({ styles, name })
-  }
-  if (customStyles) {
-    results.styles.push(customStyles)
-  }
-  return <Component ref={ref} css={results.styles} {...otherProps} />
-})
+export function withBox<T, K = React.BaseHTMLAttributes<HTMLDivElement>>(
+  options: StyleGuideValue
+) {
+  type Props = MakeBoxProps<T, K>
+  const Box = React.forwardRef<unknown, Props>((props, ref) => {
+    const getStyles = propsToStyles(options.styleGuide)
+    const { css, Component } = props
+    const customStyles = cssToStyle(css)
+    const results = getStyles(props)
+    const keysUsed = results.used
+    const otherProps = omitKeys(
+      props,
+      'Component',
+      'css',
+      // @ts-ignore
+      ...keysUsed
+    )
+    if (customStyles) {
+      results.styles.push(customStyles)
+    }
+    const BoxComponent = Component || options.defaultComponent
+    return <BoxComponent ref={ref} css={results.styles} {...otherProps} />
+  })
+  Box.displayName = 'Box'
+  return Box
+}
 
-Box.displayName = 'Box'
+export const Box = withBox({ defaultComponent: 'div', styleGuide: flexStyles })
