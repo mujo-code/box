@@ -1,3 +1,15 @@
 {
-  "extends": "@mujo"
+  "extends": "@mujo",
+  "rules": {
+    "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+    "import/no-extraneous-dependencies": "off",
+    "guard-for-in": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
 }
