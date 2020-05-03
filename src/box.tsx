@@ -15,14 +15,8 @@ export function withBox<T, K = React.BaseHTMLAttributes<HTMLDivElement>>(
     const { css, Component } = props
     const customStyles = cssToStyle(css)
     const results = getStyles(props)
-    const keysUsed = results.used
-    const otherProps = omitKeys(
-      props,
-      'Component',
-      'css',
-      // @ts-ignore
-      ...keysUsed
-    )
+    const args = [props, 'Component', 'css'].concat(results.used)
+    const otherProps = omitKeys.apply(null, args)
     if (customStyles) {
       results.styles.push(customStyles)
     }

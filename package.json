@@ -84,8 +84,17 @@
   },
   "babel": {
     "presets": [
-      "react-app",
+      [
+        "react-app",
+        {
+          "runtime": "automatic"
+        }
+      ],
       "@babel/preset-typescript"
     ]
+  },
+  "dependencies": {
+    "@types/object-keys": "^1.0.1",
+    "object-keys": "^1.1.1"
   }
 }

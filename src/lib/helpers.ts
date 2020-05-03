@@ -1,4 +1,5 @@
 import { css, SerializedStyles, CSSObject } from '@emotion/core'
+import keys from 'object-keys'
 import { StyleGuideHash, BoxProps } from '../types'
 
 type CSSToStyle = (cssProp: CSSObject) => SerializedStyles
@@ -51,16 +52,15 @@ interface PropsToStylesRet {
 export function propsToStyles<T>(stylesObjs: StyleGuideHash) {
   return (props: Partial<BoxProps<T>>): PropsToStylesRet => {
     const used: string[] = []
-    const styles = Object.keys(props)
+    const styles = keys(props)
       .map(mapToPair(props))
       .map(pair => {
-        const [key, value] = pair
-        if (cssDataPattern.test(key)) {
-          used.push(key)
-          return key.replace(cssDataPattern, 'css')
+        if (cssDataPattern.test(pair[0])) {
+          used.push(pair[0])
+          return pair[0].replace(cssDataPattern, 'css')
         }
         return [stylesObjs].reduce(
-          mapToStyleGuideValue({ used, key, value }),
+          mapToStyleGuideValue({ used, key: pair[0], value: pair[1] }),
           null
         )
       })
@@ -81,7 +81,9 @@ export const makeStyles: MakeStyles = (property: string, props) => {
   }
   let key: keyof typeof props
   for (key in props) {
-    ret[key] = { [property]: props[key] }
+    const cssObject = {}
+    cssObject[property] = props[key]
+    ret[key] = cssObject
   }
   return ret
 }
