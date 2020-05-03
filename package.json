@@ -21,7 +21,7 @@
   "author": "Jacob Lowe",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-typescript": "^7.9.4",
     "@babel/preset-env": "^7.4.5",
