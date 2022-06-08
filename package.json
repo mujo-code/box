@@ -51,8 +51,8 @@
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
-    "@emotion/core": ">=10.0.14",
-    "react": ">=16.8.6"
+    "@emotion/core": ">=11",
+    "react": ">=16"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -94,6 +94,7 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "^11.9.0",
     "@types/object-keys": "^1.0.1",
     "object-keys": "^1.1.1"
   }

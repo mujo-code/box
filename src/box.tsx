@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import React from 'react'
 import { propsToStyles, cssToStyle } from './lib/helpers'
 import { omitKeys } from './lib/omit-keys'
