@@ -1,4 +1,4 @@
-import { css, SerializedStyles, CSSObject } from '@emotion/core'
+import { css, SerializedStyles, CSSObject } from '@emotion/react'
 import keys from 'object-keys'
 import { StyleGuideHash, BoxProps } from '../types'
 
