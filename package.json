@@ -1,6 +1,6 @@
 {
   "name": "@mujo/box",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "A React utility to add a style guide to primative components",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
