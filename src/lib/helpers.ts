@@ -2,9 +2,9 @@ import { css, SerializedStyles, CSSObject } from '@emotion/react'
 import keys from 'object-keys'
 import { StyleGuideHash, BoxProps } from '../types'
 
-type CSSToStyle = (cssProp: CSSObject) => SerializedStyles
+type CSSToStyle = (cssProp) => SerializedStyles
 
-export const cssToStyle: CSSToStyle = cssProp =>
+export const cssToStyle: CSSToStyle = (cssProp: CSSObject) =>
   cssProp ? css(cssProp) : css({})
 
 export function mapToPair<T>(props: Partial<BoxProps<T>>) {
@@ -54,7 +54,7 @@ export function propsToStyles<T>(stylesObjs: StyleGuideHash) {
     const used: string[] = []
     const styles = keys(props)
       .map(mapToPair(props))
-      .map(pair => {
+      .map((pair) => {
         if (cssDataPattern.test(pair[0])) {
           used.push(pair[0])
           return pair[0].replace(cssDataPattern, 'css')
@@ -64,7 +64,7 @@ export function propsToStyles<T>(stylesObjs: StyleGuideHash) {
           null
         )
       })
-      .filter(x => x) as SerializedStyles[]
+      .filter((val): val is SerializedStyles => typeof val !== 'string')
     return { used, styles }
   }
 }
